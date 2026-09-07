@@ -53,6 +53,7 @@ details and links.
 - Dhruvi Shah
 - Veera Bharakhada
 - Divija Nayak
+  
 *(All members contribute to experiments, analysis, and the final report.)*
 
 ## Status
