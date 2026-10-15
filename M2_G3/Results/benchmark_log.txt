@@ -1,0 +1,41 @@
+{
+  "runs": 10,
+  "seed_start": 42,
+  "settings": {
+    "players": 8,
+    "time_steps": 30,
+    "matches_per_time": 10,
+    "skill_step_sd": 0.22,
+    "beta": 1.0,
+    "process_var": 0.0484
+  },
+  "mean": {
+    "constant_logloss": 0.6931471805599453,
+    "constant_brier": 0.25,
+    "elo_logloss": 0.5701387717031917,
+    "elo_brier": 0.19378702348933358,
+    "elo_runtime_sec": 0.0012076411999828451,
+    "forward_skill_mae": 0.8637276644527689,
+    "forward_runtime_sec": 0.04222693660000232,
+    "ttt_ep_skill_mae": 0.3179286176571648,
+    "ttt_ep_runtime_sec": 1.3220067029999938,
+    "forward_logloss": 0.6093744535684398,
+    "forward_brier": 0.19803007866349828
+  },
+  "sample_sd": {
+    "constant_logloss": 0.0,
+    "constant_brier": 0.0,
+    "elo_logloss": 0.04868334447044943,
+    "elo_brier": 0.021012985596027836,
+    "elo_runtime_sec": 0.0003746930217859978,
+    "forward_skill_mae": 0.1716055128166087,
+    "forward_runtime_sec": 0.008032702549886077,
+    "ttt_ep_skill_mae": 0.0406161955071362,
+    "ttt_ep_runtime_sec": 0.2064423248999039,
+    "forward_logloss": 0.0666947841147866,
+    "forward_brier": 0.026656285708690376
+  },
+  "ttt_ep_convergence_rate": 1.0,
+  "ttt_ep_mean_iterations": 16.7,
+  "runtime_note": "Wall-clock values are small-workload measurements and hardware-dependent."
+}

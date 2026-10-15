@@ -1,0 +1,14 @@
+{
+  "seed": 42,
+  "rows": 300,
+  "unique_players_observed": 8,
+  "missing_required_fields": 0,
+  "duplicate_pair_time_keys": 0,
+  "outcome_encoding": "y_a=1 means player a won; y_a=0 means player b won",
+  "player_a_win_fraction": 0.5,
+  "mean_absolute_true_skill_difference": 1.525837704645892,
+  "correlation_true_skill_difference_vs_player_a_win": 0.6947297473011558,
+  "correlation_warning": "Exploratory simulation sanity check only; correlation is not causal structure and is not computed from player IDs.",
+  "input_audit_passed": true,
+  "audit_errors": []
+}

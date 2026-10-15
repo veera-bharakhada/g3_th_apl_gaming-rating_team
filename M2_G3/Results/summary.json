@@ -1,0 +1,59 @@
+{
+  "runs": 10,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "settings": {
+    "players": 8,
+    "time_steps": 30,
+    "matches_per_time": 10,
+    "skill_step_sd": 0.22,
+    "beta": 1.0,
+    "process_var": 0.0484,
+    "model": "restricted binary two-player TTT-style EP prototype"
+  },
+  "means": {
+    "constant_logloss": 0.6931471805599453,
+    "constant_brier": 0.25,
+    "elo_logloss": 0.5701387717031917,
+    "elo_brier": 0.19378702348933355,
+    "forward_logloss": 0.6093744535684398,
+    "forward_brier": 0.19803007866349825,
+    "forward_skill_mae": 0.8637276644527689,
+    "ttt_ep_skill_mae": 0.31792861765716474,
+    "elo_runtime_sec": 0.00068252810000894,
+    "forward_runtime_sec": 0.02635776000000186,
+    "ttt_ep_runtime_sec": 0.5762817748000032,
+    "ttt_ep_iterations": 16.7,
+    "ttt_ep_converged": 1.0
+  },
+  "sample_sd": {
+    "constant_logloss": 0.0,
+    "constant_brier": 0.0,
+    "elo_logloss": 0.04868334447044943,
+    "elo_brier": 0.021012985596027853,
+    "forward_logloss": 0.06669478411478659,
+    "forward_brier": 0.026656285708690382,
+    "forward_skill_mae": 0.1716055128166087,
+    "ttt_ep_skill_mae": 0.04061619550713618,
+    "elo_runtime_sec": 6.888568531008403e-05,
+    "forward_runtime_sec": 0.001139170745112665,
+    "ttt_ep_runtime_sec": 0.10405205428755408
+  },
+  "paired_skill_mae_test": {
+    "mean_forward_minus_ttt_ep": 0.5457990467956042,
+    "t_statistic": 11.401863251083691,
+    "p_value": 1.1887917612700415e-06
+  },
+  "ttt_ep_convergence_rate": 1.0,
+  "note": "Synthetic results only; this is a TTT-style binary EP prototype, not full package reproduction. Runtime is hardware-dependent."
+}

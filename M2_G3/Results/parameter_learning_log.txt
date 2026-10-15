@@ -1,0 +1,2 @@
+Best validation setting: {'process_var': 0.25, 'beta': 1.3, 'validation_logloss': 0.5640133138940555, 'validation_matches': 60, 'seed': 42}
+Full grid written: /mnt/data/work/M2_Group3/Results/parameter_grid.csv

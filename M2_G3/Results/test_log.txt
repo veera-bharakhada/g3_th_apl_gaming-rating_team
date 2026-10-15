@@ -1,0 +1,14 @@
+test_activity_aware_generator_is_reproducible_and_valid (test_models.ModelTests.test_activity_aware_generator_is_reproducible_and_valid) ... ok
+test_coursework_data_audit (test_models.ModelTests.test_coursework_data_audit) ... ok
+test_d_separation_chain_and_collider (test_models.ModelTests.test_d_separation_chain_and_collider) ... ok
+test_filter_and_smoother_finite (test_models.ModelTests.test_filter_and_smoother_finite) ... ok
+test_logloss (test_models.ModelTests.test_logloss) ... ok
+test_pair_update_moves_winner_up (test_models.ModelTests.test_pair_update_moves_winner_up) ... ok
+test_reproducible_generator (test_models.ModelTests.test_reproducible_generator) ... ok
+test_skill_graph_diagnostics (test_models.ModelTests.test_skill_graph_diagnostics) ... ok
+test_win_probability_symmetric (test_models.ModelTests.test_win_probability_symmetric) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.092s
+
+OK

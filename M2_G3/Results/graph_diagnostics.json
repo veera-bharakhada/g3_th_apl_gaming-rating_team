@@ -1,0 +1,45 @@
+{
+  "input_audit": {
+    "n_matches": 8,
+    "n_players_declared": 8,
+    "n_time_steps_declared": 30,
+    "n_rows_with_errors": 0,
+    "errors": [],
+    "player_a_win_fraction": 0.5,
+    "outcome_encoding": "y_a=1 means player a won; y_a=0 means player b won"
+  },
+  "graph": {
+    "nodes": 264,
+    "directed_edges": 264,
+    "factorization_term_count": 264
+  },
+  "example_match": {
+    "skill_a": "skill_0_0",
+    "skill_b": "skill_2_0",
+    "performance_a": "perf_a_0",
+    "performance_b": "perf_b_0",
+    "result": "result_0"
+  },
+  "markov_blanket_skill_a": [
+    "perf_a_0",
+    "perf_a_4",
+    "perf_b_7",
+    "skill_0_1"
+  ],
+  "d_separation_checks": {
+    "skill_a_independent_of_skill_b_before_observing_result": true,
+    "skill_a_independent_of_skill_b_after_observing_result": false,
+    "skill_a_independent_of_result_given_both_performances": true
+  },
+  "factorization_example_first_8": [
+    "P(perf_a_0 | skill_0_0)",
+    "P(perf_a_1 | skill_2_0)",
+    "P(perf_a_2 | skill_1_0)",
+    "P(perf_a_3 | skill_1_0)",
+    "P(perf_a_4 | skill_0_0)",
+    "P(perf_a_5 | skill_4_0)",
+    "P(perf_a_6 | skill_4_0)",
+    "P(perf_a_7 | skill_4_0)"
+  ],
+  "interpretation": "Result is a common effect of the two performances: observing it can connect the players' skill variables (explaining away). Conditioning on both performances blocks the path to that match result."
+}

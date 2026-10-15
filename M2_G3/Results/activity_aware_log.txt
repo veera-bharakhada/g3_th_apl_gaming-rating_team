@@ -1,0 +1,29 @@
+{
+  "runs": 5,
+  "seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "means": {
+    "fixed_drift_skill_mae": 0.571028313283521,
+    "activity_aware_skill_mae": 0.5801456387012534,
+    "fixed_drift_runtime_sec": 0.7562276467999709,
+    "activity_aware_runtime_sec": 0.7495451098000331,
+    "fixed_drift_iterations": 32.0,
+    "activity_aware_iterations": 32.0,
+    "inactive_player_time_fraction": 0.3979166666666667
+  },
+  "standard_deviations": {
+    "fixed_drift_skill_mae": 0.23523767165663012,
+    "activity_aware_skill_mae": 0.2522840741519303,
+    "fixed_drift_runtime_sec": 0.5632148880796073,
+    "activity_aware_runtime_sec": 0.48180426259607967,
+    "fixed_drift_iterations": 21.828879952943073,
+    "activity_aware_iterations": 20.760539492026695,
+    "inactive_player_time_fraction": 0.02102773878977743
+  },
+  "interpretation": "Pilot synthetic test of activity-dependent transition variance. Do not generalize to real ATP data; activity is observed from the generated schedule and the two variance levels are known by construction."
+}
