@@ -1,44 +1,43 @@
-# CSE516 Major Project – M3: Results and Analysis
+# Code – M3 Experiments
 
-## Project Overview
+## Contents
 
-This project investigates Bayesian player-skill estimation over time using tennis match outcomes. It evaluates whether incorporating individual-level performance observations alongside team match outcomes improves the estimation of individual player skills.
+This folder contains the Jupyter Notebook used to implement and evaluate the proposed Bayesian player-skill estimation approach.
 
-The project compares two approaches:
+### Notebook
 
-- **Baseline Model:** Uses team match outcomes only.
-- **Extended Model:** Uses team match outcomes along with individual-level performance observations.
+`CSE516_M3_Results_Analysis.ipynb`
 
-The experiments use synthetically generated doubles tennis match data because the available ATP history dataset does not contain the individual-level statistics required for this extension.
+## Notebook Description
 
-## Project Structure
+The notebook contains the implementation of:
 
-- `Report/` – Final M3 Results and Analysis report.
-- `Code/` – Jupyter Notebook containing the implementation and experiments.
-- `Data/` – Synthetic doubles tennis dataset used in the experiments.
-- `Results/` – Experimental results, statistical analysis and robustness evaluation outputs.
+1. Synthetic doubles tennis match data generation.
+2. Baseline model using team match outcomes.
+3. Extended model incorporating individual-level performance observations.
+4. Player-skill estimation and evaluation.
+5. Experiments using ten random seeds (42–51).
+6. MAE, RMSE, log-loss and Brier score calculations.
+7. Statistical significance testing and bootstrap confidence intervals.
+8. Robustness experiments involving sample size, missing observations and observation noise.
+9. Player-level error analysis.
+10. Runtime, convergence and uncertainty evaluation.
+11. Export of experimental results and dataset files.
 
-## Experimental Evaluation
+## Execution
 
-The evaluation includes:
+The notebook can be opened and executed using Google Colab or Jupyter Notebook.
 
-- Comparison of baseline and extended models.
-- Skill estimation accuracy using MAE and RMSE.
-- Predictive performance using log-loss and Brier score.
-- Experiments across ten random seeds (42–51).
-- Statistical significance testing and bootstrap confidence intervals.
-- Robustness analysis involving sample size, missing observations and observation noise.
-- Player-level error analysis.
-- Runtime, convergence and uncertainty analysis.
+Run the notebook cells in their intended order to generate the synthetic data, execute the experiments and obtain the corresponding results.
 
 ## Reproducibility
 
-The experiments use fixed random seeds to ensure reproducibility. Running the notebook with the same code and parameters should reproduce the synthetic datasets and corresponding experimental results.
+Fixed random seeds are used for the experiments. Using the same code, seeds and parameters should reproduce the same synthetic data and numerical results.
 
-Runtime measurements may vary depending on the execution environment.
+Runtime measurements may vary across environments.
 
-## Important Note
+## Dependencies
 
-The dataset is synthetic and does not represent actual ATP match statistics. The implemented model is a simplified temporal Bayesian proof-of-concept inspired by TrueSkill Through Time and is not a complete implementation of the original TTT algorithm.
+The notebook uses Python and its scientific computing libraries, including NumPy, Pandas, SciPy and Matplotlib.
 
-For further details, refer to the M3 report.
+Refer to the notebook for the implementation details and experimental configuration.
