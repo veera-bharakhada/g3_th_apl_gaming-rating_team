@@ -1,87 +1,102 @@
-# Bayesian Network-Based Estimation and Comparison of Player Skill Over Time
+# Temporal Bayesian Player-Skill Estimation — CSE 516 Group 3
 
-**CSE 516 — Probabilistic Graphical Models | Group 3 | Category: Theoretical AI**
+**Course:** CSE 516 — Probabilistic Graphical Models  
+**Project:** Individual-Level Evidence for Temporal Bayesian Player-Skill Estimation: A Controlled Ablation  
+**Team:** Dhruvi Shah · Divija Nayak · Veera Bharakhada  
+**Status:** M1–M4 project artifacts assembled (final submission)
 
 ## Overview
 
-This project studies how the choice of inference method affects Bayesian estimates
-of time-varying player skill, using **TrueSkill Through Time (TTT)** — a Dynamic
-Bayesian Network model that lets information flow both forward and backward through
-time — as the core probabilistic model and methodological focus.
+Doubles-match outcomes reveal information about a team's combined strength but can leave the abilities of individual teammates difficult to distinguish. This project investigates whether **noisy individual-level observations** improve estimation of **time-varying latent player skills** compared with using team match outcomes alone.
 
-**Mathematical question:** How much does bidirectional information flow through a
-temporal Bayesian network improve skill estimates over forward-only filtering, and
-what computational cost do the inference methods that enable this introduce?
+The final experiment is a **controlled synthetic ablation** of two simplified temporal probabilistic models:
 
-We study this through the full PGM pipeline:
-- **Representation** — a Dynamic Bayesian Network / factor graph over skill,
-  performance, and match outcome
-- **Inference** — exact belief propagation, loopy belief propagation, and
-  expectation propagation
-- **Learning** — parameter (not structure) learning via evidence maximization
+- **Team-only baseline:** latent Gaussian random-walk player skills with a logistic likelihood for doubles-match results.
+- **Individual-evidence extension:** the same model and match outcomes, augmented with Gaussian observations associated with participating individual players.
 
-## Base Paper
+Both models use maximum a posteriori (MAP) estimation via SciPy L-BFGS-B and a Laplace approximation to quantify local posterior uncertainty. This final comparison is **not** a reproduction of published TrueSkill Through Time (TTT) or a head-to-head benchmark against it.
 
-G. Landfried and E. Mocskos, *"TrueSkill Through Time: Reliable Initial Skill
-Estimates and Historical Comparability with Julia, Python, and R,"* Journal of
-Statistical Software, vol. 112, no. 6, pp. 1–41, Mar. 2025.
-doi: [10.18637/jss.v112.i06](https://doi.org/10.18637/jss.v112.i06)
-→ see [`BasePaper/`](./BasePaper)
+## Project progression
 
-## Baseline & SOTA Reference
+| Milestone | Scope | Location |
+|---|---|---|
+| M1 — Proposal | Research question, TTT literature anchor, initial representation/inference/learning plan and dataset exploration | [`M1_G3/`](M1_G3/) |
+| M2 — Implementation and extension | Initial TTT-inspired inference prototype and a separate individual-evidence MAP/Laplace extension; preliminary demonstrations | [`M2_G3/`](M2_G3/) |
+| M3 — Evaluation | Ten-seed paired comparison, predictive metrics, robustness sweeps, uncertainty and player-level diagnostics | [`M3_G3/`](M3_G3/) |
+| M4 — Final synthesis | Conference-style report, presentation, video link, consolidated code/data/results and reproducibility notes | [`M4_G3/`](M4_G3/) |
 
-- **Baseline:** R. Herbrich, T. Minka, T. Graepel, *"TrueSkill(TM): A Bayesian
-  Skill Rating System,"* NIPS 2006 (Microsoft Research) — the original,
-  forward-only filtering system that TTT generalizes.
-- **SOTA reference:** M. Jones, P. Chang, K. Murphy, *"Bayesian Online Natural
-  Gradient (BONG),"* NeurIPS 2024 (Kevin Murphy — Google DeepMind) — a recent,
-  methodologically related approach to sequential Bayesian inference, used as
-  our comparison axis for message-passing smoothing vs. single-step online
-  optimization.
+The research direction evolved across milestones. In particular, the **M2 original TTT-inspired prototype** and the **M2 individual-evidence extension** are distinct implementations. The M3/M4 numerical results refer to the simplified individual-evidence ablation, not to a direct comparison with the published TTT software.
 
-## Repository Structure
+## Final experimental setup
 
-| Folder | Purpose |
-|---|---|
-| [`M1_G3/`](./M1_G3) | Milestone 1 submission: report, video link |
-| [`BasePaper/`](./BasePaper) | Base paper PDF |
-| [`Data/`](./Data) | ATP tennis match dataset, download scripts, synthetic dataset generator |
+- **Data:** synthetic doubles matches with known latent skills; 12 players, 30 time points, 12 matches per time point.
+- **Paired runs:** 10 seeds, 42–51; both models evaluated on matching synthetic conditions for each seed.
+- **Split:** time points 0–20 for training; 21–29 for held-out evaluation.
+- **Model parameters:** skill prior SD 1.0, temporal drift SD 0.12, logistic temperature 0.8, individual-observation noise SD 0.65.
+- **Inference:** MAP via L-BFGS-B; Laplace covariance approximation from the local Hessian.
+- **Metrics:** held-out latent-skill MAE/RMSE, match-outcome log-loss/Brier score, runtime, optimizer iterations and approximate posterior SD.
+- **Additional analyses:** observation missingness, observation noise, match-count robustness, seed-42 player errors and a descriptive reliability diagram.
 
-## Dataset
+The synthetic individual observations are informative by construction. No test-period match outcomes or individual observations are used to fit the models.
 
-**Primary:** ATP (Association of Tennis Professionals) match history — ~447,000
-singles/doubles matches, 1915–2020, 19,000+ players.
-Source: https://github.com/glandfried/tennis_atp/releases/download/atp/history.csv.zip
+## Main findings
 
-**Validation:** A small synthetic dataset with a known ground-truth skill
-trajectory, used to verify inference correctness before drawing conclusions from
-real data.
+| Metric (10 paired seeds; mean ± sample SD) | Team-only baseline | Individual evidence |
+|---|---:|---:|
+| Skill MAE ↓ | 0.4372 ± 0.1400 | **0.2632 ± 0.0366** |
+| Skill RMSE ↓ | 0.5357 ± 0.1586 | **0.3284 ± 0.0395** |
+| Match log-loss ↓ | 0.5835 ± 0.0568 | **0.5601 ± 0.0655** |
+| Match Brier score ↓ | 0.1999 ± 0.0242 | **0.1893 ± 0.0269** |
 
-See [`Data/README.md`](./Data/README.md) for full details.
+The mean paired skill-MAE reduction is **0.173951** (about **39.8%** relative to baseline). All 10 paired seeds show an MAE reduction; the archived paired t-test gives **p ≈ 0.00547**, and the paired bootstrap 95% confidence interval for the reduction is approximately **[0.0971, 0.2736]**. These results support an improvement **within the specified synthetic generator**, not a general claim about real-world tennis or published TTT. Smaller approximate posterior SD alone does not demonstrate better uncertainty calibration.
 
-## Team
+## Repository guide
 
-- Dhruvi Shah
-- Divija Nayak
-- Veera Bharakhada
+```text
+.
+├── README.md                         # This overview
+├── BasePaper/                        # Published TTT reference paper
+├── Data/                             # Earlier dataset/source notes
+├── M1_G3/                            # Proposal milestone
+├── M2_G3/                            # Initial implementation and extension
+├── M3_G3/                            # Experimental evaluation milestone
+└── M4_G3/                            # Final submission package
+    ├── README.md                     # Final-project details
+    ├── Report/M4_G3_Report.pdf
+    ├── Presentation/M4_G3_Slides.pdf
+    ├── Video/                        # Video link; see submission note below
+    ├── Code/
+    │   ├── README.md
+    │   ├── requirements.txt
+    │   ├── verify_results.py
+    │   └── src/
+    │       ├── CSE516_M2_Limitation_and_Solution.ipynb
+    │       └── CSE516_M3_Results_Analysis.ipynb
+    ├── Data/
+    │   ├── README.md
+    │   └── synthetic_doubles_data.csv
+    └── Results/                      # CSV tables, tests, diagnostics and plots
+```
 
-*Understanding of the full Representation–Inference–Learning pipeline is a shared
-responsibility across the team; specific workstream ownership will be finalized
-at the start of M2.*
+For the **final deliverable**, start with [`M4_G3/README.md`](M4_G3/README.md). The M4 `Code/`, `Data/` and `Results/` directories each include their own documentation.
 
-## Status
+## Quick start: verify archived results
 
-- **M1 (current):** Proposal & scoping complete — problem statement, R/I/L
-  mapping, baseline, SOTA position, dataset, initial KPIs, experimental plan,
-  and timeline. See [`M1_G3/`](./M1_G3).
-- **M2 (11 Oct 2026):** Bayesian network / factor graph implementation, exact
-  belief propagation, Elo and TrueSkill baselines.
-- **M3 (1 Nov 2026):** Loopy belief propagation, expectation propagation,
-  hyperparameter learning, initial experiments and KPIs.
-- **M4 (22 Nov 2026):** Full statistical analysis, robustness studies, final
-  SOTA comparison, reproducibility package.
+From the repository root, install Python 3 dependencies and run:
 
-## Setup
+```bash
+python -m pip install -r M4_G3/Code/requirements.txt
+python M4_G3/Code/verify_results.py
+```
 
-See [`Code/README.md`](./Code/README.md) for installation and run instructions
-(updated as implementation progresses).
+The verifier checks the archived CSV structure, seed pairing, metrics and recorded MAE reduction. **It does not rerun the models or independently recompute the archived significance test.** To reproduce experiments, open [`M4_G3/Code/src/CSE516_M3_Results_Analysis.ipynb`](M4_G3/Code/src/CSE516_M3_Results_Analysis.ipynb) and follow [`M4_G3/Code/README.md`](M4_G3/Code/README.md). The notebook includes Google Colab-specific download cells and writes some results to a relative `M3_Results/` directory; a complete clean-environment rerun has not been asserted here.
+
+## Research reference and scope
+
+**Base paper:** G. Landfried and E. Mocskos, *TrueSkill Through Time: Reliable Initial Skill Estimates and Historical Comparability with Julia, Python, and R*, Journal of Statistical Software **112**(6), 2025. [DOI: 10.18637/jss.v112.i06](https://doi.org/10.18637/jss.v112.i06). The paper provides the temporal-skill modeling research context; the final experiment uses a simpler model and different inference approach.
+
+**Limitations:** synthetic data only; player-level signals constructed to be informative; fixed hyperparameters; no published-TTT head-to-head evaluation; no demonstrated transfer to real-world player ratings; and approximate posterior uncertainty without a comprehensive calibration guarantee.
+
+## Final submission notes
+
+The M4 directory contains the report, slides, code, data and results. **Before submission, rename** `M4_G3/Video/M4_G3_Video.md` **to** `M4_G3/Video/M4_G3_Video_Link.txt` **to match the requested filename**, preserving the existing video URL. Verify the video is accessible to the evaluators. Each group member must also complete the required individual submission form separately.
