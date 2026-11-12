@@ -1,0 +1,3 @@
+Model,MAE,RMSE
+Baseline: team outcome only,0.3726775669419037,0.466808837664445
+Extension: team + individual observations,0.21802764476226955,0.2852782021062963
