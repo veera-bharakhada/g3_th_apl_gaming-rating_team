@@ -1,36 +1,35 @@
-# Data – Synthetic Doubles Tennis Dataset
+# Data — Synthetic doubles-match observations
 
-## Dataset Description
+## File and provenance
 
-**File:** `synthetic_doubles_data.csv`
+`synthetic_doubles_data.csv` is a **360-match, seed-42 example dataset** generated for the simplified doubles skill-estimation experiments. It is not the combined dataset for all ten seeds. The M3 notebook regenerates separate synthetic match histories for seeds **42–51** during evaluation.
 
-This dataset contains 360 synthetically generated doubles tennis matches used for the M3 experimental evaluation.
+There are **no real ATP individual-performance measurements** in this dataset. Individual observations are simulated directly from latent skill plus Gaussian noise; this is a favorable proof-of-concept setting.
 
-It contains the following columns:
+## Schema
 
 | Column | Description |
 |---|---|
-| `time` | Match time point |
-| `a1`, `a2` | Player IDs in Team A |
-| `b1`, `b2` | Player IDs in Team B |
-| `a_wins` | Team A match outcome |
-| `perf_a1`, `perf_a2` | Simulated individual performance observations for Team A |
-| `perf_b1`, `perf_b2` | Simulated individual performance observations for Team B |
+| `time` | Time index of the match (0–29). |
+| `a1`, `a2` | Two player IDs on team A. |
+| `b1`, `b2` | Two player IDs on team B. |
+| `a_wins` | Binary outcome, 1 if team A wins and 0 otherwise. |
+| `perf_a1`, `perf_a2` | Synthetic individual performance observations for team A. |
+| `perf_b1`, `perf_b2` | Synthetic individual performance observations for team B. |
 
-## Data Generation
+## Generator and split
 
-The dataset was generated programmatically using a fixed random seed (42), with the default experimental configuration.
+- 12 players, 30 time points, 12 matches per time point.
+- Latent skills start with SD 1 and evolve by Gaussian random-walk increments of SD 0.12.
+- Team A's win probability is the logistic function of the difference between team-average skills divided by temperature 0.8.
+- Each participating player's individual observation equals their latent skill plus independent Gaussian noise with SD 0.65.
+- Training times: 0–20; test times: 21–29. **No test outcomes or test individual observations enter model fitting.**
+- Main experiment uses paired seeds 42–51; the CSV in this directory is only an illustrative seed-42 file.
 
-The data is synthetic and was created to provide controlled individual-level performance observations for evaluating the proposed extension.
+## Reproduction
 
-## Usage
+See `../Code/src/CSE516_M3_Results_Analysis.ipynb` for the generator and complete ten-seed experiments. See `../Code/README.md` for execution instructions, output directories and Google Colab-specific cells. Regenerating a CSV using the same seed also depends on running the same generator implementation and compatible numerical-library versions.
 
-The dataset is used for the baseline and extended Bayesian player-skill estimation experiments.
+## Limitations
 
-It is intended to support reproducibility and demonstrate the input format used in the experiments.
-
-## Important Note
-
-This dataset does not contain actual ATP match statistics or real player-performance records. The individual-level observations are simulated and should not be interpreted as real-world tennis statistics.
-
-The notebook contains the data-generation procedure.
+This dataset is synthetic and should not be interpreted as a real tennis dataset, nor as evidence that the same gains will transfer to actual players. The observation model assumes player-specific information that is directly informative about latent skill.
