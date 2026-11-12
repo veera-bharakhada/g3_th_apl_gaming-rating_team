@@ -1,8 +1,6 @@
 """Verify the archived M4 Group 3 results without rerunning experiments.
 
-Run from any working directory:
-    python M4_G3/Code/src/verify_results.py
-or, if placed in Code/:
+Run from the repository root:
     python M4_G3/Code/verify_results.py
 """
 from pathlib import Path
