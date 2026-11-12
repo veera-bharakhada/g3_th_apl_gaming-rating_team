@@ -1,35 +1,45 @@
-# Group 3 — CSE516 M2
+# Group 3 — CSE 516 Milestone 2
 
-## Project
-**Bayesian Network-Based Estimation of Player Skill Over Time**
+**Project:** Bayesian Network-Based Estimation of Player Skill Over Time  
+**Team:** Dhruvi Shah, Divija Nayak, Veera Bharakhada
 
-## M2 focus
-1. Define the temporal Bayesian network and factorization.
-2. Implement and test a restricted TTT-style inference prototype.
-3. Report a small set of initial KPIs from reproducible synthetic experiments.
-4. Describe active-trail pruning as a research direction for a later milestone.
+## Original M2: temporal skill-inference prototype
 
-## Main files
-- `Report/M2_Group3_Report.pdf` — revised report focused on the agreed M2 scope.
-- `Code/src/` — prototype, parameter tuning, graph diagnostics, extension pilot, and tests.
-- `Results/` — KPI summaries, per-run results, logs, diagnostics, and plots.
-- `M2_Group3_Colab_Demo.ipynb` — notebook used to run the project.
-- `Report/ACTIVE_TRAIL_LIMITATION_NOTE.md` — research gap and validation plan.
-- `Video/M2_Group3_Video_Script.txt` — walkthrough script.
-- `Code/requirements.txt` — Python dependencies required to run the project.
+The original M2 work defines a temporal Bayesian skill model and tests a restricted two-player TrueSkill Through Time (TTT)-style expectation-propagation (EP) prototype using synthetic match data. It includes supporting parameter experiments, diagnostics, an activity-aware pilot and automated tests. These are historical M2 investigations; they are **not** the same implementation as the individual-evidence extension below.
 
-## Initial Synthetic KPIs
+### Original M2 files
 
-- Skill-recovery MAE: 0.3179 ± 0.0406.
-- EP convergence: 10/10 runs.
-- Average EP iterations: 16.7.
-- Best validation log-loss: 0.5640 on 60 validation matches.
+- [`Report/M2_Group3_Report.pdf`](Report/M2_Group3_Report.pdf) — original M2 report.
+- [`M2_Group3_Colab_Demo.ipynb`](M2_Group3_Colab_Demo.ipynb) — demonstration notebook.
+- [`Code/`](Code/) — source code, dependencies and execution instructions.
+- [`Results/`](Results/) — original M2 experimental outputs and figures.
+- [`M2_Data/README.md`](M2_Data/README.md) — synthetic-data description.
+- [`Video/`](Video/) — original M2 video link file (currently named `M3_G2_video.md`; rename for clarity).
 
-These preliminary results were obtained from synthetic experiments using the restricted TTT-style prototype. They provide an initial assessment of skill estimation and inference behaviour.
+### Preliminary original M2 results
 
-## Run in Colab
-Open `M2_Group3_Colab_Demo.ipynb`, upload/extract the project ZIP when prompted, then run the notebook cells in order. Save the executed notebook and the generated result archive.
+- Skill-recovery MAE: **0.3179 ± 0.0406**.
+- EP convergence: **10/10 runs**.
+- Mean EP iterations: **16.7**.
+- Best validation log-loss: **0.5640** on 60 validation matches.
 
+These values belong to the original restricted TTT-style EP prototype and **must not be compared as if they came from the separate MAP extension experiment**.
 
-## Scientific boundary
-Active-trail pruning has not been validated. An off-season is not automatically a separator; posterior preservation and computational savings must be tested before making such claims.
+## M2 extension: individual-level evidence
+
+The [`Extension/`](Extension/) folder contains a separate proof-of-concept study addressing the difficulty of distinguishing individual teammate skills from shared doubles outcomes. It introduces **synthetic individual performance observations** into a simplified temporal Bayesian model, fitted with **MAP/L-BFGS-B** and assessed with a **Laplace approximation**.
+
+- [`Extension/README.md`](Extension/README.md) — detailed purpose, files, methods and reproduction steps.
+- [`Extension/Report/CSE516_M2_Extension_Report.pdf`](Extension/Report/CSE516_M2_Extension_Report.pdf) — extension report.
+- [`Extension/Code/CSE516_M2_Limitation_and_Solution.ipynb`](Extension/Code/CSE516_M2_Limitation_and_Solution.ipynb) — extension notebook.
+- [`Extension/Results/`](Extension/Results/) — preliminary seed-42 outputs.
+
+The extension's seed-42 skill MAE is **0.372678** for team-only evidence and **0.218028** with individual evidence. See its README for the remaining metrics. These are **single-seed preliminary results**, not the later M3 ten-seed averages.
+
+## Progression
+
+M2 established the original inference prototype and a separate individual-evidence extension. The subsequent [`M3_G3/`](../M3_G3/) milestone evaluates the team-only versus team-plus-individual-evidence ablation over ten seeds with statistical and robustness analysis. The final model is **not** presented as a full published TTT EP implementation or a head-to-head SOTA benchmark.
+
+## Reproduction
+
+For the original M2 code, see [`Code/README.md`](Code/README.md). For the separate extension notebook, see [`Extension/README.md`](Extension/README.md). Both use synthetic data; reported results do not establish real-world tennis performance.
