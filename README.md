@@ -99,4 +99,4 @@ The verifier checks the archived CSV structure, seed pairing, metrics and record
 
 ## Final submission notes
 
-The M4 directory contains the report, slides, code, data and results. **Before submission, rename** `M4_G3/Video/M4_G3_Video.md` **to** `M4_G3/Video/M4_G3_Video_Link.txt` **to match the requested filename**, preserving the existing video URL. Verify the video is accessible to the evaluators. Each group member must also complete the required individual submission form separately.
+The M4 directory contains the report, slides, code, data and results, preserving the existing video URL. Verify the video is accessible to the evaluators. Each group member must also complete the required individual submission form separately.
