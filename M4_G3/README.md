@@ -47,7 +47,7 @@ M4_G3/
 ├── Report/
 │   └── M4_G3_Report.pdf
 ├── Video/
-│   └── M4_G3_Video_Link.txt
+│   └── M4_G3_Video.md
 ├── Presentation/
 │   └── M4_G3_Slides.pdf
 ├── Code/
@@ -91,7 +91,7 @@ The research anchor is the published TrueSkill Through Time work by Landfried an
 
 - `Report/M4_G3_Report.pdf` — final paper.
 - `Presentation/M4_G3_Slides.pdf` — final presentation.
-- `Video/M4_G3_Video_Link.txt` — replace with the real accessible video URL (or include the video file).
+- `Video/M4_G3_Video.md` — replace with the real accessible video URL (or include the video file).
 - `Code/`, `Data/`, `Results/` — complete technical package.
 - **Individual Google Form** — completed separately by each group member; not stored in this repository.
 
