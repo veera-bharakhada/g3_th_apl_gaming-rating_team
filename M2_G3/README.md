@@ -14,7 +14,7 @@ The original M2 work defines a temporal Bayesian skill model and tests a restric
 - [`Code/`](Code/) — source code, dependencies and execution instructions.
 - [`Results/`](Results/) — original M2 experimental outputs and figures.
 - [`M2_Data/README.md`](M2_Data/README.md) — synthetic-data description.
-- [`Video/`](Video/) — original M2 video link file (currently named `M3_G2_video.md`; rename for clarity).
+- [`Video/`](Video/) — `M2_G3_video.md`
 
 ### Preliminary original M2 results
 
